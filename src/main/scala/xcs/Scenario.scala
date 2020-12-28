@@ -1,4 +1,5 @@
 package xcs
+import Constants.{rng}
 
 trait Scenario[Condition,Action,Reward] {
   var remainingCycles : Int
@@ -17,7 +18,7 @@ trait Scenario[Condition,Action,Reward] {
 class MultiplexProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double] {
   type Instance = (Condition,Phenotype)
   var filename = "/Users/yilmaz/IdeaProjects/LCS/src/main/scala/6MultiplexerData.txt"
-  var  dm = new DataManagement()
+  var dm = new DataManagement()
   var data : Array[(Condition,Phenotype)] = dm.loadFile(filename,6).toArray
   var index : Int = 0
   var steps : Int = 0
@@ -31,6 +32,9 @@ class MultiplexProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double]
 
   def reset: Unit = {
     remainingCycles = cycles
+    rng = new scala.util.Random()
+    index = 0
+    steps = 0
   }
 
   def sense : (Condition,Phenotype) = {
@@ -61,7 +65,7 @@ class MultiplexProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double]
 class LCSOmegaProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double] {
   type Instance = (Condition,Phenotype)
   var filename = "/Users/yilmaz/IdeaProjects/LCS/src/main/scala/LCSOmegaData.txt"
-  var  dm = new DataManagement()
+  var dm = new DataManagement()
   var data : Array[(Condition,Phenotype)] = dm.loadFile(filename,3).toArray
   var index : Int = 0
   var steps : Int = 0
@@ -74,6 +78,9 @@ class LCSOmegaProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double] 
 
   def reset: Unit = {
     remainingCycles = cycles
+    rng = new scala.util.Random()
+    index = 0
+    steps = 0
   }
 
   def sense : (Condition,Phenotype) = {
@@ -82,6 +89,53 @@ class LCSOmegaProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double] 
     index = (index + 1) % data.length
     instance
   }
+
+
+  def execute(action: String): Double = {
+    var reward : Double = 0.0
+    remainingCycles = remainingCycles - 1
+    steps = steps + 1
+    if (action.equals(currentSituation.get._2.data.get.bits)) reward = 1000.0
+    else reward = 0.0
+    reward
+  }
+
+  def getRewardValue(r: Double) : Double = r
+
+  def getActionData : Phenotype => String = {p =>
+    p.data.get.bits
+  }
+}
+
+
+class LCSAUProblem(cycles: Int) extends Scenario[Condition,Phenotype,Double] {
+  type Instance = (Condition,Phenotype)
+  var filename = "/Users/yilmaz/IdeaProjects/LCS/src/main/scala/LCSAUData.txt"
+  var dm = new DataManagement()
+  var data : Array[(Condition,Phenotype)] = dm.loadFile(filename,14).toArray
+  var index : Int = 0
+  var steps : Int = 0
+  var currentSituation : Option[Instance] = None
+  var remainingCycles : Int = cycles
+  var possibleActions : List[Phenotype] = List(Phenotype("0"),Phenotype("1"))
+  def more : Boolean = {
+    remainingCycles > 0
+  }
+
+  def reset: Unit = {
+    remainingCycles = cycles
+    rng = new scala.util.Random()
+    index = 0
+    steps = 0
+  }
+
+  def sense : (Condition,Phenotype) = {
+    val instance = data(index)
+    currentSituation = Some(instance)
+    index = (index + 1) % data.length
+    instance
+  }
+
 
   def execute(action: String): Double = {
     var reward : Double = 0.0

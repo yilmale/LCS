@@ -4,12 +4,19 @@ import Constants._
 import xcs.BitString
 
 class Condition {
-  var data : Option[BitString] = None
+  var data: Option[BitString] = None
 
   def set(bits: String): Unit = {
-    data = Some(BitString(bits) )
+    data = Some(BitString(bits))
+  }
+
+  def equals(c: Condition): Boolean = {
+    println("here")
+    if (data.isDefined) data.get.bits.equals(c.data.get.bits)
+    else false
   }
 }
+
 
 object Condition {
   def apply(bits:String): Condition = {

@@ -1,5 +1,6 @@
 package lcs
 
+import Constants.{rng}
 
 trait Scenario[Condition,Action,Reward] {
   var remainingCycles : Int
@@ -28,6 +29,9 @@ class MultiplexProblem(cycles: Int) extends Scenario[Condition,Phenotype,Boolean
 
   def reset: Unit = {
     remainingCycles = cycles
+    rng = new scala.util.Random()
+    index = 0
+    steps = 0
   }
 
   def sense : (Condition,Phenotype) = {
@@ -63,6 +67,9 @@ class LCSOmegaProblem(cycles: Int) extends Scenario[Condition,Phenotype,Boolean]
 
   def reset: Unit = {
     remainingCycles = cycles
+    rng = new scala.util.Random()
+    index = 0
+    steps = 0
   }
 
   def sense : (Condition,Phenotype) = {

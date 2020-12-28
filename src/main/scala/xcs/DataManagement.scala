@@ -14,7 +14,8 @@ class DataManagement {
       line.split("\\s+") foreach {str =>
         sb = sb ++= str
       }
-      dataFrame = sb.toString() ::  dataFrame
+      var str : String = sb.toString()
+      dataFrame = str ::  dataFrame
     }
 
     dataFrame.reverse.tail foreach {bs =>
