@@ -7,6 +7,7 @@ object Ternary extends Enumeration {
   type Ternary = Value
   val True, False, WC, NULL = Value
 }
+
 import Ternary._
 
 class BitString(val bits: String) {

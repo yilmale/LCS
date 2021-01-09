@@ -12,7 +12,7 @@ object Constants {
   var fitnessReduction : Double = 0.1
   var doGASubsumption : Boolean = true
   var beta : Double = 0.2
-  var theta_del : Int =20
+  var theta_del : Int = 20
   var delta : Double = 0.1
   var theta_sub : Int = 20
   var acc_sub : Double = 0.99
