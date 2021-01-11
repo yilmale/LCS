@@ -10,12 +10,13 @@ object LCSMain extends App {
     ucs.report(cl => (cl.fitness > 0.8) && (cl.accuracy > 0.8))
     */
 
-    /*
+
     var problem = new LCSOmegaProblem(10000)
-    var ucs : SupervisedLCS  = new SupervisedLCS()
+    var ucs = new SupervisedLCS with Reporter
     ucs.run(problem)
-    ucs.report(cl => (cl.fitness > 0.5) && (cl.accuracy > 0.5))
-  */
+    ucs.sort(ucs.report(cl => (cl.fitness > 0.5) && (cl.accuracy > 0.5))) foreach { cl =>
+        println(cl.report())
+    }
 
     /*
     var uslcs = new UnSupervisedLCS with Reporter
@@ -46,6 +47,7 @@ object LCSMain extends App {
 
     */
 
+    /*
     var problem = new LCSAUProblem(10000)
     var ucs : SupervisedLCS with Reporter = new SupervisedLCS with Reporter
     ucs.run(problem)
@@ -54,7 +56,7 @@ object LCSMain extends App {
     ucs.sort(results) foreach {cl =>
       println(cl.report())
     }
-
+*/
 
     /*
       var uslcs : UnSupervisedLCS with Reporter = new UnSupervisedLCS with Reporter {}
