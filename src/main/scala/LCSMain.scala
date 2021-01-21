@@ -12,14 +12,11 @@ object LCSMain extends App {
 
 
     var problem = new LCSOmegaProblem(10000)
-    var ucs : SupervisedLCS with Reporter = new SupervisedLCS with Reporter
+    var ucs = new SupervisedLCS with Reporter
     ucs.run(problem)
-    var results = ucs.report(cl => (cl.fitness > 0.5) && (cl.accuracy > 0.7))
-    println("--------Sorted Results ------ ")
-    ucs.sort(results) foreach {cl =>
-      println(cl.report())
+    ucs.sort(ucs.report(cl => (cl.fitness > 0.5) && (cl.accuracy > 0.5))) foreach { cl =>
+        println(cl.report())
     }
-
 
     /*
     var uslcs = new UnSupervisedLCS with Reporter
