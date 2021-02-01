@@ -69,19 +69,5 @@ object LCSMain extends App {
 
     */
 
-    /*
-      var s1: String = "1122"
-      var s2: String = "1122"
-
-      var s3: String = "1122"
-      var s4: String = "1122"
-
-      var S1 : Set[Tuple3[String,String,Double]] = Set()
-      S1 = S1 + Tuple3(s1,s2,0.5)
-      S1 = S1 + Tuple3(s3,s4,0.7)
-
-      println(S1)
-
-    */
 
 }
