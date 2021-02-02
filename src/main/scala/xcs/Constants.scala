@@ -6,7 +6,7 @@ object Constants {
   val N: Int = 1000
   val p_wc: Double = 0.33
   var rng: scala.util.Random = new scala.util.Random()
-  var chi: Double = 0.5
+  var chi: Double = 0.05
   var upsilon: Double = 0.01
   var theta_GA: Int = 25
   var fitnessReduction: Double = 0.1
@@ -18,7 +18,7 @@ object Constants {
   var initialPrediction : Double = 0.0
   var initialError : Double = 0.0
   val initialFitness: Double = 0.0
-  val pExploration : Double = 0.5
+  val pExploration : Double = 0.2
   val beta : Double = 0.2
   val alpha : Double = 0.1
   val errorThreshold : Double = 10
