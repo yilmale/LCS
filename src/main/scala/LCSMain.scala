@@ -4,6 +4,15 @@ import xcs._
 
 object LCSMain extends App {
 
+
+    var uslcs : UnSupervisedLCS with Reporter = new UnSupervisedLCS with Reporter {}
+    uslcs.run(new MultiplexProblem(50000))
+    var results = uslcs.report(cl => (cl.fitness > 0.9))
+    println("--------Sorted Results ------ ")
+    uslcs.sort(results) foreach {cl =>
+       println(cl.report())
+    }
+
     /*
     var ucs : SupervisedLCS  = new SupervisedLCS()
     ucs.run(new MultiplexProblem(2000))
@@ -61,12 +70,6 @@ object LCSMain extends App {
     */
 
 
-      var uslcs : UnSupervisedLCS with Reporter = new UnSupervisedLCS with Reporter {}
-      uslcs.run(new MultiplexProblem(50000))
-      var results = uslcs.report(cl => (cl.fitness > 0.9))
-      println("--------Sorted Results ------ ")
-      uslcs.sort(results) foreach {cl =>
-        println(cl.report())
-      }
+
 
 }
